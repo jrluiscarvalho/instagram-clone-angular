@@ -6,10 +6,15 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./acesso.component.css']
 })
 export class AcessoComponent implements OnInit {
+  public cadastro: boolean = false
 
   constructor() { }
 
   ngOnInit() {
+  }
+
+  public exibirPainel(event: string) : void {
+    this.cadastro = event === 'cadastro' ? true : false
   }
 
 }
