@@ -1,6 +1,7 @@
 import { Usuario } from '../model/usuario.model';
 import * as firebase from 'firebase'
 
+
 export class Authentication{
   public cadastrarUsuario(usuario: Usuario): void {
 
@@ -20,5 +21,15 @@ export class Authentication{
         console.log(error)
       })
 
+  }
+
+  public auth(email: string, senha: string): void{
+    console.log(email)
+    console.log(senha)
+    firebase
+      .auth()
+      .signInWithEmailAndPassword(email, senha)
+      .then((res: any) => console.log(res))
+      .catch((err: Error) => console.log(err))
   }
 }
