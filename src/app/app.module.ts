@@ -2,13 +2,15 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms'
 
+import { Authentication } from './services/authentication.services'
+
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { AcessoComponent } from './acesso/acesso.component';
-import { BannerComponent } from './acesso/banner/banner.component';
-import { LoginComponent } from './acesso/login/login.component';
-import { CadastroComponent } from './acesso/cadastro/cadastro.component';
-import { IncluirPublicacaoComponent } from './home/incluir-publicacao/incluir-publicacao.component';
+import { AcessoComponent } from './components/acesso/acesso.component';
+import { BannerComponent } from './components/acesso/banner/banner.component';
+import { LoginComponent } from './components/acesso/login/login.component';
+import { CadastroComponent } from './components/acesso/cadastro/cadastro.component';
+import { IncluirPublicacaoComponent } from './components/home/incluir-publicacao/incluir-publicacao.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +26,7 @@ import { IncluirPublicacaoComponent } from './home/incluir-publicacao/incluir-pu
     AppRoutingModule,
     ReactiveFormsModule
   ],
-  providers: [],
+  providers: [Authentication],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
