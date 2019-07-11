@@ -11,6 +11,8 @@ import { BannerComponent } from './components/acesso/banner/banner.component';
 import { LoginComponent } from './components/acesso/login/login.component';
 import { CadastroComponent } from './components/acesso/cadastro/cadastro.component';
 import { IncluirPublicacaoComponent } from './components/home/incluir-publicacao/incluir-publicacao.component';
+import { HomeComponent } from './components/home/home.component';
+import { PublicacoesComponent } from './components/home/publicacoes/publicacoes.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +21,9 @@ import { IncluirPublicacaoComponent } from './components/home/incluir-publicacao
     BannerComponent,
     LoginComponent,
     CadastroComponent,
-    IncluirPublicacaoComponent
+    IncluirPublicacaoComponent,
+    HomeComponent,
+    PublicacoesComponent
   ],
   imports: [
     BrowserModule,
