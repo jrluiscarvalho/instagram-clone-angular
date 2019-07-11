@@ -3,9 +3,11 @@ import { Routes, RouterModule } from '@angular/router';
 import { AcessoComponent } from './components/acesso/acesso.component';
 import { HomeComponent } from './components/home/home.component';
 
+import {AuthGuard} from './services/auth-guard..service'
+
 const routes: Routes = [
   {path: '', component: AcessoComponent},
-  {path: 'home', component: HomeComponent}
+  {path: 'home', component: HomeComponent, canActivate:[AuthGuard]}
 ];
 
 @NgModule({
