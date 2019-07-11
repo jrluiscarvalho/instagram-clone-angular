@@ -57,7 +57,7 @@ export class Authentication{
       this.router.navigate(['/'])
     }
 
-    return this.token_id === undefined
+    return this.token_id !== undefined
   }
 
   public logout(): void {
