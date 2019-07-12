@@ -38,4 +38,39 @@ export class DbService {
         )
       })
     }
+
+    public getPublications(email: string): void {
+      firebase
+        .database()
+        .ref(`publicacoes/${btoa(email)}`)
+        .once('value')
+        .then((snapshot: any) => {
+
+          let publications: Array<any> = [];
+
+          snapshot.forEach((item: any) => {
+
+            let publication = item.val()
+
+            firebase
+            .storage()
+            .ref()
+            .child(`imagens/${item.key}`)
+            .getDownloadURL()
+            .then((url: string) => {
+              publication.url_image = url;
+
+              firebase
+                .database()
+                .ref(`usuario_detalhe/${btoa(email)}`)
+                .once('value')
+                .then((snapshot: any) => {
+                  publication.nome_usuario = snapshot.val().nome_usuario;
+
+                  publications.push(publication)
+                })
+            })
+          });
+        })
+    }
   }
