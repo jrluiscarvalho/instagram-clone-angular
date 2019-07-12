@@ -1,12 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { DbService } from 'src/app/services/db.service';
 import * as firebase from 'firebase'
+
 @Component({
-  selector: 'app-publicacoes',
-  templateUrl: './publicacoes.component.html',
-  styleUrls: ['./publicacoes.component.css']
+  selector: 'app-publications',
+  templateUrl: './publications.component.html',
+  styleUrls: ['./publications.component.css']
 })
-export class PublicacoesComponent implements OnInit {
+export class PublicationsComponent implements OnInit {
 
   public email: string;
   public publications: any;
@@ -25,7 +26,6 @@ export class PublicacoesComponent implements OnInit {
     this.dbService.getPublications(this.email)
       .then((publications: any) => {
         this.publications = publications;
-        console.log(this.publications)
       })
   }
 }

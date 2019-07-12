@@ -10,11 +10,11 @@ import { AuthenticationService } from '../../../services/authentication.service'
 })
 export class LoginComponent implements OnInit {
 
-  @Output() public exibirPainel: EventEmitter<string> = new EventEmitter<string>()
+  @Output() public showPanel: EventEmitter<string> = new EventEmitter<string>()
 
   public form: FormGroup = new FormGroup({
     'email': new FormControl(null),
-    'senha': new FormControl(null)
+    'password': new FormControl(null)
   })
 
   constructor(
@@ -24,12 +24,12 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
   }
 
-  public exibirPainelCadastro():void {
-    this.exibirPainel.emit('cadastro')
+  public showRegisterPanel():void {
+    this.showPanel.emit('register')
   }
 
   public auth(): void {
-    this.authentication.auth(this.form.value.email, this.form.value.senha)
+    this.authentication.auth(this.form.value.email, this.form.value.password)
   }
 
 }

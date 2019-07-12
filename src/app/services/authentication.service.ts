@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core'
 import { Router } from '@angular/router'
-import { Usuario } from '../model/usuario.model';
+import { User } from '../model/user.model';
 import * as firebase from 'firebase'
 
 @Injectable({
@@ -12,32 +12,29 @@ export class AuthenticationService {
 
   constructor(private router: Router){ }
 
-  public cadastrarUsuario(usuario: Usuario): Promise<any> {
+  public registerUser(user: User): Promise<any> {
 
     return firebase
       .auth()
-      .createUserWithEmailAndPassword(usuario.email, usuario.senha)
+      .createUserWithEmailAndPassword(user.email, user.password)
       .then((res: any) => {
 
-        delete usuario.senha;
+        delete user.password;
 
         firebase
         .database()
-        .ref(`usuario_detalhe/${btoa(usuario.email)}`)
-        .set(usuario)
+        .ref(`user_detail/${btoa(user.email)}`)
+        .set(user)
       })
       .catch((error: Error) => {
-        console.log(error)
       })
 
   }
 
-  public auth(email: string, senha: string): void{
-    console.log(email)
-    console.log(senha)
+  public auth(email: string, password: string): void{
     firebase
       .auth()
-      .signInWithEmailAndPassword(email, senha)
+      .signInWithEmailAndPassword(email, password)
       .then((res: any) =>{
         firebase.auth().currentUser.getIdToken()
           .then(idToken => {
@@ -46,7 +43,7 @@ export class AuthenticationService {
             this.router.navigate(['/home'])
           })
       })
-      .catch((err: Error) => console.log(err))
+      .catch((err: Error) =>{})
   }
 
   public authenticated(): boolean {

@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import * as firebase from 'firebase'
 import { ProgressService } from './progress.service';
-import { IncluirPublicacaoComponent } from '../components/home/incluir-publicacao/incluir-publicacao.component';
 
 @Injectable({
   providedIn: 'root'
@@ -15,26 +14,26 @@ export class DbService {
     firebase
     .database()
     .ref(`publicacoes/${btoa(data.email)}`)
-    .push({titulo: data.titulo})
+    .push({title: data.title})
     .then((resp:any) => {
 
-      let nomeImagem = resp.key;
+      let imageName = resp.key;
 
       firebase
       .storage()
       .ref()
-      .child(`imagens/${nomeImagem}`)
-      .put(data.imagem)
+      .child(`images/${imageName}`)
+      .put(data.image)
       .on(firebase.storage.TaskEvent.STATE_CHANGED,
         (snapshot:any) => {
-          this.progressService.status = 'em andamento'
-          this.progressService.estado = snapshot
+          this.progressService.status = 'in progress'
+          this.progressService.state = snapshot
         },
         (error) => {
           this.progressService.status = 'erro'
         },
         () => {
-          this.progressService.status = 'concluido'
+          this.progressService.status = 'finished'
         }
         )
       })
@@ -65,17 +64,17 @@ export class DbService {
             firebase
             .storage()
             .ref()
-            .child(`imagens/${item.key}`)
+            .child(`images/${item.key}`)
             .getDownloadURL()
             .then((url: string) => {
               item.url_image = url;
 
               firebase
               .database()
-              .ref(`usuario_detalhe/${btoa(email)}`)
+              .ref(`user_detail/${btoa(email)}`)
               .once('value')
               .then((snapshot: any) => {
-                item.nome_usuario = snapshot.val().nome_usuario;
+                item.username = snapshot.val().username;
               })
             })
           })

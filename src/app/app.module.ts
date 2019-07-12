@@ -9,24 +9,22 @@ import { ProgressService } from './services/progress.service'
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { AcessoComponent } from './components/acesso/acesso.component';
-import { BannerComponent } from './components/acesso/banner/banner.component';
-import { LoginComponent } from './components/acesso/login/login.component';
-import { CadastroComponent } from './components/acesso/cadastro/cadastro.component';
-import { IncluirPublicacaoComponent } from './components/home/incluir-publicacao/incluir-publicacao.component';
+import { LoginComponent } from './components/access/login/login.component';
 import { HomeComponent } from './components/home/home.component';
-import { PublicacoesComponent } from './components/home/publicacoes/publicacoes.component';
+import { AccessComponent } from './components/access/access.component';
+import { RegisterComponent } from './components/access/register/register.component';
+import { IncludePublicationsComponent } from './components/home/include-publications/include-publications.component';
+import { PublicationsComponent } from './components/home/publications/publications.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    AcessoComponent,
-    BannerComponent,
     LoginComponent,
-    CadastroComponent,
-    IncluirPublicacaoComponent,
     HomeComponent,
-    PublicacoesComponent
+    AccessComponent,
+    RegisterComponent,
+    IncludePublicationsComponent,
+    PublicationsComponent
   ],
   imports: [
     BrowserModule,

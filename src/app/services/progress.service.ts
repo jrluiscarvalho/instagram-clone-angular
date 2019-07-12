@@ -7,7 +7,7 @@ import { Injectable } from '@angular/core';
 export class ProgressService {
 
   public status: string
-  public estado: any
+  public state: any
 
   constructor() { }
 }

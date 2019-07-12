@@ -1,12 +1,13 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { AcessoComponent } from './components/acesso/acesso.component';
 import { HomeComponent } from './components/home/home.component';
+import { AccessComponent } from './components/access/access.component';
 
 import {AuthGuard} from './services/auth-guard.service'
 
+
 const routes: Routes = [
-  {path: '', component: AcessoComponent},
+  {path: '', component: AccessComponent},
   {path: 'home', component: HomeComponent, canActivate:[AuthGuard]}
 ];
 

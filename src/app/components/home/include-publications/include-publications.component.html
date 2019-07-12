@@ -1,6 +1,6 @@
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
-    <div class="modal-content" *ngIf="progressPublish === 'pendente'">
+    <div class="modal-content" *ngIf="progressPublish === 'pending'">
       <form [formGroup]="form" (ngSubmit)="publicar()">
         <div class="modal-header">
           <h5 class="modal-title" id="exampleModalLabel">Criar uma publicação</h5>
@@ -13,13 +13,13 @@
           type="file"
           class="form-control"
           accept="image/*"
-          (change)=preparaImagemUpload($event)
+          (change)=prepareUploadImage($event)
           />
           <input
           type="text"
           placeholder="Titulo da publicação"
           class="form-control"
-          formControlName="titulo">
+          formControlName="title">
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
@@ -27,7 +27,7 @@
         </div>
       </form>
     </div>
-    <div class="modal-content" *ngIf="progressPublish === 'andamento'">
+    <div class="modal-content" *ngIf="progressPublish === 'in progress'">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel">Publicação em andamento</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -41,7 +41,7 @@
           </div>
       </div>
     </div>
-    <div class="modal-content" *ngIf="progressPublish === 'concluido'">
+    <div class="modal-content" *ngIf="progressPublish === 'finished'">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel">Publicação foi realizada com sucesso</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
