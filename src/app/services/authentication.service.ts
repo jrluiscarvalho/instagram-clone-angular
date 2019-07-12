@@ -3,8 +3,10 @@ import { Router } from '@angular/router'
 import { Usuario } from '../model/usuario.model';
 import * as firebase from 'firebase'
 
-@Injectable()
-export class Authentication{
+@Injectable({
+  providedIn: 'root'
+})
+export class AuthenticationService {
 
   public token_id: string;
 
