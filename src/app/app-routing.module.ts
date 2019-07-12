@@ -3,7 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { AcessoComponent } from './components/acesso/acesso.component';
 import { HomeComponent } from './components/home/home.component';
 
-import {AuthGuard} from './services/auth-guard..service'
+import {AuthGuard} from './services/auth-guard.service'
 
 const routes: Routes = [
   {path: '', component: AcessoComponent},

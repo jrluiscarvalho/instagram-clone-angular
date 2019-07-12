@@ -2,7 +2,7 @@ import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { FormGroup, FormControl} from '@angular/forms'
 
 import { Usuario } from '../../../model/usuario.model'
-import { Authentication } from '../../../services/authentication.services'
+import { AuthenticationService } from '../../../services/authentication.service'
 
 @Component({
   selector: 'app-cadastro',
@@ -21,7 +21,7 @@ export class CadastroComponent implements OnInit {
   });
 
   constructor(
-    private authentication: Authentication
+    private authentication: AuthenticationService
   ) { }
 
   ngOnInit() {

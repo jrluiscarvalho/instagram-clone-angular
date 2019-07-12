@@ -2,9 +2,10 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms'
 
-import { Authentication } from './services/authentication.services'
-import { AuthGuard } from './services/auth-guard..service'
+import { AuthenticationService } from './services/authentication.service'
+import { AuthGuard } from './services/auth-guard.service'
 import { DbService } from './services/db.service'
+import { ProgressService } from './services/progress.service'
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -32,7 +33,7 @@ import { PublicacoesComponent } from './components/home/publicacoes/publicacoes.
     AppRoutingModule,
     ReactiveFormsModule
   ],
-  providers: [Authentication, AuthGuard, DbService],
+  providers: [AuthenticationService, AuthGuard, DbService, ProgressService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
