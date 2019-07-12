@@ -4,6 +4,7 @@ import { ReactiveFormsModule } from '@angular/forms'
 
 import { Authentication } from './services/authentication.services'
 import { AuthGuard } from './services/auth-guard..service'
+import { DbService } from './services/db.service'
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -31,7 +32,7 @@ import { PublicacoesComponent } from './components/home/publicacoes/publicacoes.
     AppRoutingModule,
     ReactiveFormsModule
   ],
-  providers: [Authentication, AuthGuard],
+  providers: [Authentication, AuthGuard, DbService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
