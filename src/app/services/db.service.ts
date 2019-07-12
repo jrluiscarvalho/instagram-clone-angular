@@ -11,9 +11,15 @@ export class DbService {
 
   public publicar(data:any): void {
 
-    let nomeImagem = Date.now();
-
     firebase
+    .database()
+    .ref(`publicacoes/${btoa(data.email)}`)
+    .push({titulo: data.titulo})
+    .then((resp:any) => {
+
+      let nomeImagem = resp.key;
+
+      firebase
       .storage()
       .ref()
       .child(`imagens/${nomeImagem}`)
@@ -29,6 +35,7 @@ export class DbService {
         () => {
           this.progressService.status = 'concluido'
         }
-      )
+        )
+      })
+    }
   }
-}

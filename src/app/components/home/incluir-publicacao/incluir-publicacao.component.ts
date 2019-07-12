@@ -4,7 +4,7 @@ import * as firebase from 'firebase'
 
 import { DbService } from '../../../services/db.service'
 import { ProgressService } from 'src/app/services/progress.service';
-import { Observable, interval, Subject } from 'rxjs';
+import { interval, Subject } from 'rxjs';
 import {takeUntil} from 'rxjs/operators'
 
 @Component({
@@ -16,6 +16,10 @@ export class IncluirPublicacaoComponent implements OnInit {
 
   public email: string;
   private imagem: any;
+
+  public progressPublish: string = 'pendente';
+  public percentageUpload: number;
+
   private subject = new Subject<any>();
 
   public form: FormGroup = new FormGroup({
@@ -48,10 +52,11 @@ export class IncluirPublicacaoComponent implements OnInit {
     upload
       .pipe(takeUntil(this.subject))
       .subscribe(() => {
-        console.log(this.progressService.status)
-        console.log(this.progressService.estado)
+        this.progressPublish = 'andamento'
+        this.percentageUpload = Math.round((this.progressService.estado.bytesTransferred / this.progressService.estado.totalBytes) * 100);
 
         if (this.progressService.status === 'concluido') {
+          this.progressPublish = 'concluido'
           this.subject.next(false)
         }
       })
@@ -61,5 +66,4 @@ export class IncluirPublicacaoComponent implements OnInit {
     this.imagem = (<HTMLInputElement>event.target).files
 
   }
-
 }
