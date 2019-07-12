@@ -9,6 +9,8 @@ import * as firebase from 'firebase'
 export class PublicacoesComponent implements OnInit {
 
   public email: string;
+  public publications: any;
+
   constructor(private dbService:DbService) { }
 
   ngOnInit() {
@@ -20,9 +22,10 @@ export class PublicacoesComponent implements OnInit {
   }
 
   public updateTimeline(): void {
-    this.dbService.getPublications(this.email )
+    this.dbService.getPublications(this.email)
+      .then((publications: any) => {
+        this.publications = publications;
+        console.log(this.publications)
+      })
   }
-
-
-
 }

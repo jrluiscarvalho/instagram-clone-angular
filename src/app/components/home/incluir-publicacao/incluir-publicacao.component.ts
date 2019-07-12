@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import * as firebase from 'firebase'
 
@@ -16,6 +16,8 @@ export class IncluirPublicacaoComponent implements OnInit {
 
   public email: string;
   private imagem: any;
+
+  @Output() public updateTimeline: EventEmitter<any> = new EventEmitter<any>();
 
   public progressPublish: string = 'pendente';
   public percentageUpload: number;
@@ -57,6 +59,7 @@ export class IncluirPublicacaoComponent implements OnInit {
 
         if (this.progressService.status === 'concluido') {
           this.progressPublish = 'concluido'
+          this.updateTimeline.emit();
           this.subject.next(false)
         }
       })

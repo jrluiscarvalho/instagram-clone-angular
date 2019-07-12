@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 @Component({
   selector: 'app-home',
@@ -7,6 +7,8 @@ import { AuthenticationService } from 'src/app/services/authentication.service';
 })
 export class HomeComponent implements OnInit {
 
+  @ViewChild('publications') public publications: any;
+
   constructor(private authentication: AuthenticationService) { }
 
   ngOnInit() {
@@ -14,6 +16,10 @@ export class HomeComponent implements OnInit {
 
   public sair(): void {
     this.authentication.logout()
+  }
+
+  public updateTimeline(): void {
+    this.publications.updateTimeline();
   }
 
 }
