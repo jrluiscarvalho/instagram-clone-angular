@@ -39,8 +39,10 @@ export class DbService {
       })
     }
 
-    public getPublications(email: string): void {
-      firebase
+    public getPublications(email: string): Promise<any> {
+
+      return new Promise((resolve, reject) => {
+        firebase
         .database()
         .ref(`publicacoes/${btoa(email)}`)
         .once('value')
@@ -58,19 +60,22 @@ export class DbService {
             .child(`imagens/${item.key}`)
             .getDownloadURL()
             .then((url: string) => {
+
               publication.url_image = url;
 
               firebase
-                .database()
-                .ref(`usuario_detalhe/${btoa(email)}`)
-                .once('value')
-                .then((snapshot: any) => {
-                  publication.nome_usuario = snapshot.val().nome_usuario;
+              .database()
+              .ref(`usuario_detalhe/${btoa(email)}`)
+              .once('value')
+              .then((snapshot: any) => {
+                publication.nome_usuario = snapshot.val().nome_usuario;
 
-                  publications.push(publication)
-                })
+                publications.push(publication)
+              })
             })
           });
+          resolve(publications)
         })
+      });
     }
   }
