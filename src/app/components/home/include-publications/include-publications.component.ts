@@ -6,6 +6,7 @@ import { DbService } from '../../../services/db.service'
 import { ProgressService } from 'src/app/services/progress.service';
 import { interval, Subject } from 'rxjs';
 import {takeUntil} from 'rxjs/operators'
+import { ErrorHandlerService } from 'src/app/services/errorhandler.service';
 
 @Component({
   selector: 'app-include-publications',
@@ -29,13 +30,19 @@ export class IncludePublicationsComponent implements OnInit {
 
   constructor(
     private dbService: DbService,
-    private progressService: ProgressService
+    private progressService: ProgressService,
+    private errorHandler: ErrorHandlerService
     ) { }
 
     ngOnInit() {
-      firebase.auth().onAuthStateChanged((user) => {
-        this.email = user.email
-      })
+      try {
+        firebase.auth().onAuthStateChanged((user) => {
+          this.email = user.email
+        })
+      } catch (error) {
+        this.errorHandler.errorMessage(error)
+      }
+
     }
 
     public publicar(): void {
@@ -61,6 +68,8 @@ export class IncludePublicationsComponent implements OnInit {
           this.updateTimeline.emit();
           this.subject.next(false)
         }
+      }, (error: Error) => {
+        this.errorHandler.errorMessage(error)
       })
     }
 

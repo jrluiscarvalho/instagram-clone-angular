@@ -1,5 +1,5 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { FormGroup, FormControl } from '@angular/forms';
+import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 import { User } from 'src/app/model/user.model';
 
@@ -12,25 +12,37 @@ export class RegisterComponent implements OnInit {
 
   @Output() public showPanel: EventEmitter<string> = new EventEmitter<string>()
 
-  public form: FormGroup = new FormGroup({
-    'email': new FormControl(null),
-    'full_name': new FormControl(null),
-    'username': new FormControl(null),
-    'password': new FormControl(null),
+  public submitted = false;
+
+  public form: FormGroup = this.formBuilder.group({
+    'email': ['', [Validators.required, Validators.email]],
+    'password': ['', [Validators.required, Validators.minLength(6)]],
+    'full_name': ['', Validators.required],
+    'username': ['', Validators.required]
   });
 
   constructor(
-    private authentication: AuthenticationService
+    private authentication: AuthenticationService,
+    private formBuilder: FormBuilder
   ) { }
 
   ngOnInit() {
   }
+
+  get f() { return this.form.controls; }
 
   public showPanelLogin(): void {
     this.showPanel.emit('login')
   }
 
   public cadastrar(): void {
+
+    this.submitted = true;
+
+    if(this.form.invalid){
+      return;
+    }
+
     let user: User = new User(
       this.form.value.email,
       this.form.value.full_name,

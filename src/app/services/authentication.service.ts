@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core'
 import { Router } from '@angular/router'
 import { User } from '../model/user.model';
 import * as firebase from 'firebase'
+import { ErrorHandlerService } from './errorhandler.service';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +11,7 @@ export class AuthenticationService {
 
   public token_id: string;
 
-  constructor(private router: Router){ }
+  constructor(private router: Router, private errorHandler: ErrorHandlerService){ }
 
   public registerUser(user: User): Promise<any> {
 
@@ -27,6 +28,7 @@ export class AuthenticationService {
         .set(user)
       })
       .catch((error: Error) => {
+        this.errorHandler.errorMessage(error)
       })
 
   }
@@ -43,7 +45,9 @@ export class AuthenticationService {
             this.router.navigate(['/home'])
           })
       })
-      .catch((err: Error) =>{})
+      .catch((err: Error) =>{
+        this.errorHandler.errorMessage(err)
+      })
   }
 
   public authenticated(): boolean {

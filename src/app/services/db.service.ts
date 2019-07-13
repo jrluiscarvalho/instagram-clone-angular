@@ -1,13 +1,14 @@
 import { Injectable } from '@angular/core';
 import * as firebase from 'firebase'
 import { ProgressService } from './progress.service';
+import { ErrorHandlerService } from './errorhandler.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DbService {
 
-  constructor(private progressService: ProgressService) { }
+  constructor(private progressService: ProgressService, private errorHandler: ErrorHandlerService) { }
 
   public publicar(data:any): void {
 
@@ -36,6 +37,9 @@ export class DbService {
           this.progressService.status = 'finished'
         }
         )
+      })
+      .catch((error: Error) => {
+        this.errorHandler.errorMessage(error)
       })
     }
 
@@ -79,6 +83,9 @@ export class DbService {
             })
           })
           resolve(publications)
+        })
+        .catch((error: Error) => {
+          reject(error)
         })
       });
     }

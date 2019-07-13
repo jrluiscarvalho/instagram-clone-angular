@@ -6,6 +6,7 @@ import { AuthenticationService } from './services/authentication.service'
 import { AuthGuard } from './services/auth-guard.service'
 import { DbService } from './services/db.service'
 import { ProgressService } from './services/progress.service'
+import { ToastrModule } from 'ngx-toastr'
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -29,7 +30,8 @@ import { PublicationsComponent } from './components/home/publications/publicatio
   imports: [
     BrowserModule,
     AppRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    ToastrModule.forRoot()
   ],
   providers: [AuthenticationService, AuthGuard, DbService, ProgressService],
   bootstrap: [AppComponent]
